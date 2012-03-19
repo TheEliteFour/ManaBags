@@ -36,28 +36,68 @@ public class BagListener implements Listener {
 	if (e.getPlayer().getItemInHand() == null) {
 	    return;
 	}
-	ItemStack i = new SpoutItemStack(ManaBags.getManaMaterial().manaBag, 1);
-	ItemStack i2 = new SpoutItemStack(ManaBags.getManaMaterial().diamondWeaveUpgrade, 1);
-	ItemStack i3 = new SpoutItemStack(ManaBags.getManaMaterial().manaWorkbench, 1);
-	if (e.getPlayer().getItemInHand().getTypeId() != i.getTypeId()) {
-	    return;
+	boolean a1 = true;
+	boolean a2 = true;
+	boolean a3 = true;
+	ItemStack i = null;
+	ItemStack i2 = null;
+	ItemStack i3 = null;
+	if (!(!Config.getEnableSlot1() && !Config.getEnableSlot2() && !Config.getEnableSlot3() && !Config.getEnableSlot4() && !Config.getEnableManaWorkbench())) {
+	    i = new SpoutItemStack(ManaBags.getManaMaterial().manaBag, 1);
+	} else {
+	    a1 = false;
 	}
-	if (e.getPlayer().getItemInHand().getDurability() == i3.getDurability() && Config.getEnableManaWorkbench()) {
-	    e.getPlayer().openWorkbench(null, true);
-	    return;
+	if (!(!Config.getEnableUpgradeSlot1() && !Config.getEnableUpgradeSlot2() && !Config.getEnableUpgradeSlot3() && !Config.getEnableUpgradeSlot4())) {
+	    i2 = new SpoutItemStack(ManaBags.getManaMaterial().diamondWeaveUpgrade, 1);
+	} else {
+	    a2 = false;
 	}
+	if (Config.getEnableManaWorkbench()) {
+	    i3 = new SpoutItemStack(ManaBags.getManaMaterial().manaWorkbench, 1);
+	} else {
+	    a3 = false;
+	}
+
+	if (a1) {
+	    if (e.getPlayer().getItemInHand().getTypeId() != i.getTypeId()) {
+		return;
+	    }
+	}
+	if (a2) {
+	    if (e.getPlayer().getItemInHand().getTypeId() != i2.getTypeId()) {
+		return;
+	    }
+	}
+	if (a3) {
+	    if (e.getPlayer().getItemInHand().getTypeId() != i3.getTypeId()) {
+		return;
+	    }
+	}
+	if (a3) {
+
+	    if (e.getPlayer().getItemInHand().getDurability() == i3.getDurability() && Config.getEnableManaWorkbench()) {
+		e.getPlayer().openWorkbench(null, true);
+		return;
+	    }
+	}
+
 	if (e.getPlayer().getGameMode() == GameMode.CREATIVE && Config.getProtectCreative()) {
 	    return;
 	}
-	if (e.getPlayer().getItemInHand().getDurability() == i.getDurability()) {
-	    BagManager bm = new BagManager(e.getPlayer());
-	    bm.addBag();
-	    return;
+
+	if (a2) {
+	    if (e.getPlayer().getItemInHand().getDurability() == i.getDurability()) {
+		BagManager bm = new BagManager(e.getPlayer());
+		bm.addBag();
+		return;
+	    }
 	}
-	if (e.getPlayer().getItemInHand().getDurability() == i2.getDurability()) {
-	    BagManager bm = new BagManager(e.getPlayer());
-	    bm.upgradeBag();
-	    return;
+	if (a3) {
+	    if (e.getPlayer().getItemInHand().getDurability() == i2.getDurability()) {
+		BagManager bm = new BagManager(e.getPlayer());
+		bm.upgradeBag();
+		return;
+	    }
 	}
     }
 }
