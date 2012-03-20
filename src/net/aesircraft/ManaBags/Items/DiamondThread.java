@@ -16,7 +16,7 @@ public class DiamondThread extends GenericCustomItem {
 	ItemStack i = new SpoutItemStack(this, 1);
 	SpoutShapedRecipe r = new SpoutShapedRecipe(i);
 	r.shape("AAA", "BBB", "AAA");
-	r.setIngredient('A', ManaMaterial.manaThread);
+	r.setIngredient('A', MaterialData.string);
 	r.setIngredient('B', MaterialData.diamond);
 	SpoutManager.getMaterialManager().registerSpoutRecipe(r);
     }

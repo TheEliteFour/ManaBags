@@ -92,6 +92,8 @@ public class Config {
     }
 
     public static boolean getUsePermissions() {
+	if (!userPermissions)
+	    return userPermissions;
 	return getYaml().getBoolean("Use-Permissions", true);
     }
 
