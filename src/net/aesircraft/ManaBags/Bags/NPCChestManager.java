@@ -14,19 +14,19 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 
-public class ChestManager {
+public class NPCChestManager {
 
-    private PlayerBag bag;
+    private NPCBag bag;
     private boolean newf = false;
-    public static HashMap<Player, PlayerBag> bags = new HashMap<Player, PlayerBag>();
+    public static HashMap<Player, NPCBag> bags = new HashMap<Player, NPCBag>();
 
-    public ChestManager(PlayerBag pb) {
+    public NPCChestManager(NPCBag pb) {
 	bag = pb;
     }
 
     private File getFile() {
 	File dir = new File(ManaBags.getStatic().getDataFolder() + File.separator + "bags");
-	File dir2 = new File(ManaBags.getStatic().getDataFolder() + File.separator + "bags" + File.separator + bag.getPlayer().getName().toLowerCase());
+	File dir2 = new File(ManaBags.getStatic().getDataFolder() + File.separator + "bags" + File.separator + "NPC-"+bag.getName().toLowerCase());
 	File file = new File(dir2, bag.getId() + ".yml");
 	if (!dir.exists()) {
 	    dir.mkdir();
@@ -146,13 +146,13 @@ public class ChestManager {
 	saveYaml(config);
     }
 
-    public PlayerBag load() {
+    public NPCBag load() {
 	YamlConfiguration config = getYaml();
 	bag.setType(config.getInt("type", 0));
 	return bag;
     }
 
-    public PlayerBag loadInv() {
+    public NPCBag loadInv() {
 	load();
 	if (bag.getLarge()) {
 	    bag.setVirtualLargeChest(new VirtualLargeChest("Slot " + bag.getId() + ": Magic Bag LV: 2"));

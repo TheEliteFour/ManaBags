@@ -1,7 +1,9 @@
 package net.aesircraft.ManaBags;
 
 import java.util.logging.Logger;
+import net.aesircraft.ManaBags.API.ManaBagAPI;
 import net.aesircraft.ManaBags.Bags.BagListener;
+import net.aesircraft.ManaBags.Commands.whatisthis;
 import net.aesircraft.ManaBags.Config.Config;
 import net.aesircraft.ManaBags.Items.ManaMaterial;
 import net.aesircraft.ManaBags.Keys.Bag1Key;
@@ -22,6 +24,11 @@ public class ManaBags extends JavaPlugin {
     public static final Logger logger = Logger.getLogger("Minecraft");
     private static ManaMaterial manaMaterial;
     public static Permission permission = null;
+    private static ManaBagAPI api;
+
+    public static ManaBagAPI getManaBagAPI() {
+	return api;
+    }
 
     private Boolean setupPermissions() {
 	RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
@@ -67,6 +74,8 @@ public class ManaBags extends JavaPlugin {
 	kbm.registerBinding("Bag.3", Keyboard.KEY_NUMPAD3, "Open Bag 3", new Bag3Key(), this);
 	kbm.registerBinding("Bag.4", Keyboard.KEY_NUMPAD4, "Open Bag 4", new Bag4Key(), this);
 	new BagListener(this);
+	getCommand("whatisthis").setExecutor(new whatisthis(this));
+	api = new ManaBagAPI();
 	logger.info("[ManaBag] Loaded " + this.getDescription().getName() + " build " + this.getDescription().getVersion() + "!");
 
 

@@ -2,6 +2,7 @@ package net.aesircraft.ManaBags.Keys;
 
 import com.cypherx.xauth.xAuth;
 import com.orange451.UltimateArena.main;
+import net.aesircraft.ManaBags.Bags.ChestManager;
 import net.aesircraft.ManaBags.Bags.PlayerBag;
 import net.aesircraft.ManaBags.Config.Config;
 import org.bukkit.Bukkit;
@@ -43,6 +44,13 @@ public class Bag2Key implements BindingExecutionDelegate {
 	    }
 	}
 
+	if (PlayerBag.disabled.contains(p))
+	    return;
+	if (ChestManager.bags.containsKey(p)){
+	    PlayerBag get = ChestManager.bags.get(p);
+	    ChestManager.bags.remove(p);
+	    get.close();
+	}
 	PlayerBag pb = new PlayerBag(p, 2);
 	if (pb.getType() == 0) {
 	    sp.sendNotification("§4Notice", "§eNo bag in Slot 2!", Material.CHEST);

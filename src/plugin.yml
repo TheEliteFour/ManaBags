@@ -1,7 +1,10 @@
 name: ManaBags
 main: net.aesircraft.ManaBags.ManaBags
-version: V1.02c
+version: V1.10
 description: Complete Magic Bag system!
 authors: [TheElite4]
 softdepend: [ UltimateArena,Vault,xAuth ]
 commands: 
+  whatisthis:
+    description: Displays the information of the held item!
+    usage: /<command>

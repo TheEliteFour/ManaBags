@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.getspout.spoutapi.event.inventory.InventoryCloseEvent;
@@ -22,15 +23,23 @@ public class BagListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryEvent(InventoryCloseEvent e) {
 	Player player = e.getPlayer();
-	if (e.getInventory().getTitle().contains("Magic Bag")) {
+	if (e.getInventory().getTitle().contains("Magic Bag") && ChestManager.bags.containsKey(player)) {
 	    ChestManager.bags.get(player).close();
 	}
 
     }
 
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onDeath(PlayerDeathEvent e) {
+	DeathHandler.drop(e.getEntity(), e);
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onAdd(PlayerInteractEvent e) {
 	if (e.isCancelled()) {
+	    return;
+	}
+	if (PlayerBag.disabled.contains(e.getPlayer())) {
 	    return;
 	}
 	if (e.getPlayer().getItemInHand() == null) {
@@ -76,10 +85,11 @@ public class BagListener implements Listener {
 	if (a3) {
 
 	    if (e.getPlayer().getItemInHand().getDurability() == i3.getDurability() && Config.getEnableManaWorkbench()) {
-		if (Config.userPermissions){
-		    if (Config.getUsePermissions()){
-			if (!ManaBags.permission.has(e.getPlayer(), "manabags.user.manabench"))
+		if (Config.userPermissions) {
+		    if (Config.getUsePermissions()) {
+			if (!ManaBags.permission.has(e.getPlayer(), "manabags.user.manabench")) {
 			    return;
+			}
 		    }
 		}
 		e.getPlayer().openWorkbench(null, true);
