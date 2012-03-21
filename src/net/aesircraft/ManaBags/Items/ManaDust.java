@@ -18,7 +18,11 @@ public class ManaDust extends GenericCustomItem {
 	r.shape("ABA", "BCB", "ABA");
 	r.setIngredient('A', MaterialData.glowstoneDust);
 	r.setIngredient('B', MaterialData.lapisLazuli);
-	r.setIngredient('C', MaterialData.redstone);
+	if (Config.getHardMode()) {
+	    r.setIngredient('C', MaterialData.diamond);
+	} else {
+	    r.setIngredient('C', MaterialData.redstone);
+	}
 	SpoutManager.getMaterialManager().registerSpoutRecipe(r);
     }
 }

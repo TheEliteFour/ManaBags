@@ -53,6 +53,7 @@ public class ManaBags extends JavaPlugin {
 	setStatic();
 	PluginManager pm = getServer().getPluginManager();
 	Config.writeDefaults();
+	Config.upgrade();
 	if (Config.getUsePermissions()) {
 	    if (pm.isPluginEnabled("Vault")) {
 		setupPermissions();

@@ -30,6 +30,15 @@ public class Config {
 	return file;
     }
 
+    public static void upgrade() {
+	YamlConfiguration config = getYaml();
+	if (config.getInt("Config-Version", 0) == 0) {
+	    config.set("Config-Version", 1);
+	    config.set("Use-Hard-Mode", false);
+	    save(config);
+	}
+    }
+
     private static YamlConfiguration getYaml() {
 	YamlConfiguration config = new YamlConfiguration();
 	try {
@@ -43,6 +52,7 @@ public class Config {
 	}
 	if (newFile) {
 	    config.set("Use-Permissions", true);
+	    config.set("Use-Hard-Mode", false);
 	    config.set("Enable-Slot-1", true);
 	    config.set("Enable-Slot-2", true);
 	    config.set("Enable-Slot-3", true);
@@ -65,6 +75,7 @@ public class Config {
 	    config.set("Diamond-Thread-Texture", "http://aesircraft.net/items/diamondthread.png");
 	    config.set("Diamond-Weave-Texture", "http://aesircraft.net/items/diamondweave.png");
 	    config.set("Diamond-Weave-Upgrade-Texture", "http://aesircraft.net/items/diamondupgrade.png");
+	    config.set("Config-Version", 1);
 	    save(config);
 	    try {
 		config.load(getFile());
@@ -92,9 +103,14 @@ public class Config {
     }
 
     public static boolean getUsePermissions() {
-	if (!userPermissions)
+	if (!userPermissions) {
 	    return userPermissions;
+	}
 	return getYaml().getBoolean("Use-Permissions", true);
+    }
+
+    public static boolean getHardMode() {
+	return getYaml().getBoolean("Use-Hard-Mode", false);
     }
 
     public static boolean getEnableSlot1() {
