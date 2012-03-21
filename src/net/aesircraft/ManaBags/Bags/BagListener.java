@@ -76,6 +76,12 @@ public class BagListener implements Listener {
 	if (a3) {
 
 	    if (e.getPlayer().getItemInHand().getDurability() == i3.getDurability() && Config.getEnableManaWorkbench()) {
+		if (Config.userPermissions){
+		    if (Config.getUsePermissions()){
+			if (!ManaBags.permission.has(e.getPlayer(), "manabags.user.manabench"))
+			    return;
+		    }
+		}
 		e.getPlayer().openWorkbench(null, true);
 		return;
 	    }
