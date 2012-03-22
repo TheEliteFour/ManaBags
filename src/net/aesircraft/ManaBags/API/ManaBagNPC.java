@@ -1,6 +1,9 @@
 package net.aesircraft.ManaBags.API;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.aesircraft.ManaBags.Bags.NPCBag;
+import net.aesircraft.ManaBags.Bags.NPCBagManager;
 import org.bukkit.inventory.ItemStack;
 
 public class ManaBagNPC {
@@ -163,4 +166,31 @@ public class ManaBagNPC {
 	return false;
     }
 
+    public boolean isThereFreeBagSlot() {
+	if (!this.isSlot4Equipped()) {
+	    return true;
+	}
+	return false;
+    }
+
+    public boolean isThereUpgradableBagSlot() {
+	try {
+	    if (!this.isSlot4Large()) {
+		return true;
+	    }
+	} catch (NoBagException ex) {
+	    return false;
+	}
+	return false;
+    }
+
+    public void addBag() throws NoFreeBagException {
+	NPCBagManager pb = new NPCBagManager(player);
+	pb.addBag();
+    }
+
+    public void upgradeBag() throws NoUpgradableBagException {
+	NPCBagManager pb = new NPCBagManager(player);
+	pb.upgradeBag();
+    }
 }
