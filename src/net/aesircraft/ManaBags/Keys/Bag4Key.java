@@ -45,16 +45,17 @@ public class Bag4Key implements BindingExecutionDelegate {
 	}
 	if (PlayerBag.disabled.contains(p))
 	    return;
-	if (ChestManager.bags.containsKey(p)){
-	    PlayerBag get = ChestManager.bags.get(p);
-	    ChestManager.bags.remove(p);
-	    get.close();
-	}
 	PlayerBag pb = new PlayerBag(p, 4);
 	if (pb.getType() == 0) {
 	    sp.sendNotification("§4Notice", "§eNo bag in Slot 4!", Material.CHEST);
 	    return;
 	}
+	if (ChestManager.bags.containsKey(p)){
+	    PlayerBag get = ChestManager.bags.get(p);
+	    ChestManager.bags.remove(p);
+	    get.close();
+	}
+	
 	pb.open();
     }
 }
