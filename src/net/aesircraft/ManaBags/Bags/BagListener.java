@@ -9,9 +9,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
-import org.getspout.spoutapi.event.inventory.InventoryCloseEvent;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
 
 public class BagListener implements Listener {
@@ -20,12 +21,21 @@ public class BagListener implements Listener {
 	Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onInventoryEvent(InventoryCloseEvent e) {
-	Player player = e.getPlayer();
+	Player player = (Player) e.getPlayer();
 	if (e.getInventory().getTitle().contains("Magic Bag") && ChestManager.bags.containsKey(player)) {
 	    ChestManager.bags.get(player).close();
 	}
+
+    }
+    
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerJoin(PlayerJoinEvent e) {
+	Player player = (Player) e.getPlayer();
+	BagManager bm=new BagManager(player);
+	bm.addPermissionBag();
+	
 
     }
 
@@ -34,11 +44,8 @@ public class BagListener implements Listener {
 	DeathHandler.drop(e.getEntity(), e);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onAdd(PlayerInteractEvent e) {
-	if (e.isCancelled()) {
-	    return;
-	}
 	if (PlayerBag.disabled.contains(e.getPlayer())) {
 	    return;
 	}

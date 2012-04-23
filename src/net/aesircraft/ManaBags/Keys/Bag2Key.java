@@ -4,11 +4,15 @@ import com.cypherx.xauth.xAuth;
 import com.orange451.UltimateArena.main;
 import net.aesircraft.ManaBags.Bags.ChestManager;
 import net.aesircraft.ManaBags.Bags.PlayerBag;
+import net.aesircraft.ManaBags.Bags.View;
+import net.aesircraft.ManaBags.Bags.VirtualChest;
 import net.aesircraft.ManaBags.Config.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.inventory.InventoryView;
 import org.getspout.spoutapi.SpoutManager;
 import org.getspout.spoutapi.event.input.KeyBindingEvent;
 import org.getspout.spoutapi.gui.ScreenType;
@@ -49,6 +53,19 @@ public class Bag2Key implements BindingExecutionDelegate {
 	PlayerBag pb = new PlayerBag(p, 2);
 	if (pb.getType() == 0) {
 	    sp.sendNotification("§4Notice", "§eNo bag in Slot 2!", Material.CHEST);
+	    return;
+	}
+	VirtualChest c;
+	if (pb.getLarge()){
+	    c=pb.getVirtualLargeChest();
+	}
+	else{
+	    c=pb.getVirtualChest();
+	}
+	InventoryView gui=new View(p,c);
+	InventoryOpenEvent ev=new InventoryOpenEvent(gui);
+	Bukkit.getPluginManager().callEvent(ev);
+	if (ev.isCancelled()){
 	    return;
 	}
 	if (ChestManager.bags.containsKey(p)){

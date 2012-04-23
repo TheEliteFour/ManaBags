@@ -157,6 +157,59 @@ public class BagManager {
 	sp.sendNotification("§eSlot " + id, "§5Added Mana Bag!", Material.CHEST);
     }
 
+    public void addPermissionBag() {
+	int id;
+	if (!Config.userPermissions) {
+	    if (player.isOp()) {
+		while ((id = getFirstFreeSlot()) != 0) {
+		    PlayerBag pb = new PlayerBag(player, id);
+		    pb.upgradeType(1);
+		    pb.upgradeType(2);
+
+		}
+	    }
+	    return;
+	}
+
+	while ((id = getFirstFreeSlot()) != 0) {
+	    if (ManaBags.permission.has(player, "manabags.special.bag." + id)) {
+		PlayerBag pb = new PlayerBag(player, id);
+		pb.upgradeType(1);
+	    }
+	}
+	while ((id = getFirstFreeUpgradeSlot()) != 0) {
+	    if (ManaBags.permission.has(player, "manabags.special.upgrade." + id)) {
+		PlayerBag pb = new PlayerBag(player, id);
+		pb.upgradeType(2);
+	    }
+	}
+    }
+
+    public boolean addCommandBag() {
+	int id;
+	id = getFirstFreeSlot();
+	if (id == 0) {
+	    return false;
+	}
+
+	PlayerBag pb = new PlayerBag(player, id);
+	pb.upgradeType(1);
+	return true;
+
+    }
+
+    public boolean addCommandUpgrade() {
+	int id;
+	id = getFirstFreeUpgradeSlot();
+	if (id == 0) {
+	    return false;
+	}
+
+	PlayerBag pb = new PlayerBag(player, id);
+	pb.upgradeType(2);
+	return true;
+    }
+
     public void upgradeBag() {
 	int id = getFirstFreeUpgradeSlot();
 	if (id == 0) {
