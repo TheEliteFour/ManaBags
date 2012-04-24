@@ -13,6 +13,7 @@ public class ManaMaterial {
     public static DiamondThread diamondThread;
     public static DiamondWeave diamondWeave;
     public static DiamondWeaveUpgrade diamondWeaveUpgrade;
+    public static ManaChamber manaChamber;
 
     public ManaMaterial(ManaBags plugin) {
 	if (!(!Config.getEnableSlot1() && !Config.getEnableSlot2() && !Config.getEnableSlot3() && !Config.getEnableSlot4() && !Config.getEnableManaWorkbench())) {
@@ -30,6 +31,9 @@ public class ManaMaterial {
 	    diamondThread = new DiamondThread(plugin);
 	    diamondWeave = new DiamondWeave(plugin);
 	    diamondWeaveUpgrade = new DiamondWeaveUpgrade(plugin);
+	}
+	if (Config.getUseManaChamber()){
+	    manaChamber=new ManaChamber(plugin);
 	}
     }
 }

@@ -23,6 +23,15 @@ public class PlayerBag {
 	ChestManager c = new ChestManager(this);
 	c.load();
     }
+    
+    public VirtualChest getStandardVirtualChest(){
+	if (big){
+	    return large;
+	}
+	else{
+	    return small;
+	}
+    }
 
     public void setVirtualLargeChest(VirtualLargeChest chest) {
 	large = chest;
@@ -71,6 +80,11 @@ public class PlayerBag {
 	}
 	this.type = type;
 	c.save();
+    }
+    
+    public void load(){
+	ChestManager c = new ChestManager(this);
+	c.loadInv();
     }
 
     public void open() {

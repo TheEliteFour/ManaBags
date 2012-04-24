@@ -1,5 +1,7 @@
 package net.aesircraft.ManaBags.API;
 
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class ManaBagAPI {
@@ -16,5 +18,13 @@ public class ManaBagAPI {
 
     public ManaBagMaterials getManaBagMaterials() {
 	return materials;
+    }
+    
+    public ManaChamber getManaChamber(Block block){
+	return new ManaChamber(block.getLocation());
+    }
+    
+    public ManaChamber getManaChamber(Location location){
+	return new ManaChamber(location);
     }
 }

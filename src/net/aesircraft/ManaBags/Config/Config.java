@@ -88,7 +88,17 @@ public class Config {
 	    config.set("Death-Drop-Slot-2", false);
 	    config.set("Death-Drop-Slot-3", false);
 	    config.set("Death-Drop-Slot-4", false);
-	    config.set("Config-Version", 2);
+	    config.set("Enable-Mana-Chamber", true);	    
+	    config.set("Mana-Chamber-Texture", "http://aesircraft.net/items/manachest.png");
+	    config.set("Mana-Chamber-Texture-Size", 128);
+	    config.set("Use-Mana-Chamber-Recipe", false);
+	    List<String> s9 = new ArrayList<String>();
+	    s9.add("35-5 35-4 35-3");
+	    s9.add("35-5 35-4 35-3");
+	    s9.add("35-5 35-4 35-3");
+	    config.set("Mana-Chamber-Recipe", s9);
+	    config.set("Enable-Auto-Pickup", true);
+	    config.set("Config-Version", 3);
 	    save(config);
 	}
 	if (config.getInt("Config-Version", 0) == 1) {
@@ -144,7 +154,31 @@ public class Config {
 	    config.set("Death-Drop-Slot-2", false);
 	    config.set("Death-Drop-Slot-3", false);
 	    config.set("Death-Drop-Slot-4", false);
-	    config.set("Config-Version", 2);
+	    config.set("Enable-Mana-Chamber", true);	    
+	    config.set("Mana-Chamber-Texture", "http://aesircraft.net/items/manachest.png");
+	    config.set("Mana-Chamber-Texture-Size", 128);
+	    config.set("Use-Mana-chamber-Recipe", false);
+	    List<String> s9 = new ArrayList<String>();
+	    s9.add("35-5 35-4 35-3");
+	    s9.add("35-5 35-4 35-3");
+	    s9.add("35-5 35-4 35-3");
+	    config.set("Mana-Chamber-Recipe", s9);
+	    config.set("Enable-Auto-Pickup", true);
+	    config.set("Config-Version", 3);
+	    save(config);
+	}
+	if (config.getInt("Config-Version", 0) == 2) {	    
+	    config.set("Enable-Mana-Chamber", true);	    
+	    config.set("Mana-Chamber-Texture", "http://aesircraft.net/items/manachest.png");
+	    config.set("Mana-Chamber-Texture-Size", 128);
+	    config.set("Use-Mana-Chamber-Recipe", false);
+	    List<String> s9 = new ArrayList<String>();
+	    s9.add("35-5 35-4 35-3");
+	    s9.add("35-5 35-4 35-3");
+	    s9.add("35-5 35-4 35-3");
+	    config.set("Mana-Chamber-Recipe", s9);
+	    config.set("Enable-Auto-Pickup", true);
+	    config.set("Config-Version", 3);
 	    save(config);
 	}
     }
@@ -172,6 +206,7 @@ public class Config {
 	    config.set("Enable-Upgrade-Slot-3", true);
 	    config.set("Enable-Upgrade-Slot-4", true);
 	    config.set("Enable-Mana-Workbench", true);
+	    config.set("Enable-Mana-Chamber", true);	   
 	    config.set("Death-Drop-Slot-1", false);
 	    config.set("Death-Drop-Slot-2", false);
 	    config.set("Death-Drop-Slot-3", false);
@@ -180,6 +215,8 @@ public class Config {
 	    config.set("Use-xAuth", false);
 	    config.set("Use-UltimateArena", false);
 	    config.set("Use-Sound-Effects", true);
+	    config.set("Mana-Chamber-Texture-Size", 128);
+	    config.set("Mana-Chamber-Texture", "http://aesircraft.net/items/manachest.png");
 	    config.set("Sound-Effects-File", "http://aesircraft.net/items/poof.ogg");
 	    config.set("Mana-Dust-Texture", "http://aesircraft.net/items/manadust.png");
 	    config.set("Mana-Thread-Texture", "http://aesircraft.net/items/manathread.png");
@@ -221,6 +258,11 @@ public class Config {
 	    s8.add("35-5 35-4 35-3");
 	    s8.add("35-5 35-4 35-3");
 	    s8.add("35-5 35-4 35-3");
+	    List<String> s9 = new ArrayList<String>();
+	    s9.add("35-5 35-4 35-3");
+	    s9.add("35-5 35-4 35-3");
+	    s9.add("35-5 35-4 35-3");
+	    config.set("Use-Mana-Chamber-Recipe", false);
 	    config.set("Use-Mana-Dust-Recipe", false);
 	    config.set("Use-Mana-Thread-Recipe", false);
 	    config.set("Use-Mana-Cloth-Recipe", false);
@@ -237,7 +279,9 @@ public class Config {
 	    config.set("Diamond-Thread-Recipe", s6);
 	    config.set("Diamond-Weave-Recipe", s7);
 	    config.set("Diamond-Weave-Upgrade-Recipe", s8);
-	    config.set("Config-Version", 2);
+	    config.set("Mana-Chamber-Recipe", s9);
+	    config.set("Enable-Auto-Pickup", true);
+	    config.set("Config-Version", 3);
 	    save(config);
 
 	    try {
@@ -316,6 +360,10 @@ public class Config {
 	return getYaml().getBoolean("Death-Drop-Slot-2", false);
     }
     
+    public static boolean getEnableAutoPickup() {
+	return getYaml().getBoolean("Enable-Auto-Pickup", true);
+    }
+    
     public static boolean getDeathDropSlotSlot3() {
 	return getYaml().getBoolean("Death-Drop-Slot-3", false);
     }
@@ -339,6 +387,9 @@ public class Config {
     public static boolean getUsexAuth() {
 	return getYaml().getBoolean("Use-xAuth", false);
     }
+    public static boolean getUseManaChamber() {
+	return getYaml().getBoolean("Enable-Mana-Chamber", true);
+    }
 
     public static boolean getUseUltimateArena() {
 	return getYaml().getBoolean("Use-UltimateArena", false);
@@ -347,9 +398,21 @@ public class Config {
     public static String getManaDustTexture() {
 	return getYaml().getString("Mana-Dust-Texture", "http://aesircraft.net/items/manadust.png");
     }
+    
+    public static String getManaChamberTexture() {
+	return getYaml().getString("Mana-Chamber-Texture", "http://aesircraft.net/items/manachest.png");
+    }
+    
+    public static int getManaChamberTextureSize() {
+	return getYaml().getInt("Mana-Chamber-Texture-Size", 128);
+    }
 
     public static boolean getUseManaDustRecipe() {
 	return getYaml().getBoolean("Use-Mana-Dust-Recipe", false);
+    }
+    
+    public static boolean getUseManaChamberRecipe() {
+	return getYaml().getBoolean("Use-Mana-Chamber-Recipe", false);
     }
 
     public static boolean getUseManaThreadRecipe() {
@@ -386,6 +449,10 @@ public class Config {
 
     public static List<String> getManaThreadRecipe() {
 	return getYaml().getStringList("Mana-Thread-Recipe");
+    }
+    
+    public static List<String> getManaChamberRecipe() {
+	return getYaml().getStringList("Mana-Chamber-Recipe");
     }
 
     public static List<String> getManaClothRecipe() {
