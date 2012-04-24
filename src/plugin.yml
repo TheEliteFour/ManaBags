@@ -11,6 +11,9 @@ commands:
   givebag:
     description: Give a player a bag!
     usage: /<command> <Player>
+  givebench:
+    description: Give a player a diamond workbench!
+    usage: /<command> <Player>
   givebagupgrade:
     description: Give a player a bag!
     usage: /<command> <Player>
