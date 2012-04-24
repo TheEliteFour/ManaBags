@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 import net.aesircraft.ManaBags.API.ManaBagAPI;
 import net.aesircraft.ManaBags.Bags.BagListener;
 import net.aesircraft.ManaBags.Bags.Chests.ChestListener;
+import net.aesircraft.ManaBags.Bags.WorldManager;
 import net.aesircraft.ManaBags.Commands.givebag;
 import net.aesircraft.ManaBags.Commands.givebagupgrade;
 import net.aesircraft.ManaBags.Commands.givebench;
@@ -81,6 +82,8 @@ public class ManaBags extends JavaPlugin {
 	getCommand("givebag").setExecutor(new givebag(this));
 	getCommand("givebagupgrade").setExecutor(new givebagupgrade(this));
 	getCommand("givebench").setExecutor(new givebench(this));
+	WorldManager wm=new WorldManager();
+	wm.getInventoryWorlds();
 	api = new ManaBagAPI();
 	logger.info("[ManaBag] Loaded " + this.getDescription().getName() + " build " + this.getDescription().getVersion() + "!");
 

@@ -82,7 +82,22 @@ public class ChestManager {
     }
 
     private ItemStack[] loadInventory() {
-	List<String> l = getYaml().getStringList("items");
+	WorldManager wm = new WorldManager();
+	List<String> world = wm.getInventoryWorlds();
+	boolean sep = false;
+	for (String s : world) {
+	    if (s.toLowerCase().equals(bag.getPlayer().getWorld().getName().toLowerCase())) {
+		sep = true;
+		break;
+	    }
+	}
+	List<String> l = null;
+	if (sep) {
+	    l = getYaml().getStringList(bag.getPlayer().getWorld().getName().toLowerCase() + "-items");
+	} else {
+	    l = getYaml().getStringList("items");
+
+	}
 	ItemStack[] i;
 	if (!bag.getLarge()) {
 	    i = new ItemStack[27];
@@ -140,7 +155,22 @@ public class ChestManager {
 		s = "" + t.getTypeId() + ":" + t.getAmount() + ":" + t.getDurability() + e;
 		l.add(s);
 	    }
-	    config.set("items", l);
+	    WorldManager wm = new WorldManager();
+	    List<String> world = wm.getInventoryWorlds();
+	    boolean sep = false;
+	    for (String st : world) {
+		if (st.toLowerCase().equals(bag.getPlayer().getWorld().getName().toLowerCase())) {
+		    sep = true;
+		    break;
+		}
+	    }
+	    String loc = "";
+	    if (sep) {
+		loc = bag.getPlayer().getWorld().getName().toLowerCase() + "-items";
+	    } else {
+		loc = "items";
+	    }
+	    config.set(loc, l);
 	}
 	config.set("type", bag.getType());
 	saveYaml(config);
@@ -166,10 +196,10 @@ public class ChestManager {
 	}
 	return bag;
     }
-    
+
     public ItemStack[] retrieveInv() {
 	load();
-	ItemStack[] t=null;
+	ItemStack[] t = null;
 	if (bag.getLarge()) {
 	    bag.setVirtualLargeChest(new VirtualLargeChest("Slot " + bag.getId() + ": Magic Bag LV: 2"));
 	    t = (net.minecraft.server.ItemStack[]) loadInventory();
@@ -182,10 +212,10 @@ public class ChestManager {
 	}
 	return t;
     }
-    
+
     public void setInv(org.bukkit.inventory.ItemStack[] i) {
 	YamlConfiguration config = getYaml();
-	List<String> l = new ArrayList<String>();	
+	List<String> l = new ArrayList<String>();
 	String s;
 	if (i != null) {
 	    for (org.bukkit.inventory.ItemStack t : i) {
@@ -203,7 +233,22 @@ public class ChestManager {
 		s = "" + t.getTypeId() + ":" + t.getAmount() + ":" + t.getDurability() + e;
 		l.add(s);
 	    }
-	    config.set("items", l);
+	    WorldManager wm = new WorldManager();
+	    List<String> world = wm.getInventoryWorlds();
+	    boolean sep = false;
+	    for (String st : world) {
+		if (st.toLowerCase().equals(bag.getPlayer().getWorld().getName().toLowerCase())) {
+		    sep = true;
+		    break;
+		}
+	    }
+	    String loc = "";
+	    if (sep) {
+		loc = bag.getPlayer().getWorld().getName().toLowerCase() + "-items";
+	    } else {
+		loc = "items";
+	    }
+	    config.set(loc, l);
 	}
 	config.set("type", bag.getType());
 	saveYaml(config);
