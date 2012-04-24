@@ -33,7 +33,7 @@ public class ChestListener implements Listener {
 	if (!sb.isCustomBlock()) {
 	    return;
 	}
-	if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 	    return;
 	}
 	ManaChest mc = new ManaChest(e.getBlock());
@@ -48,7 +48,7 @@ public class ChestListener implements Listener {
 	if (!sb.isCustomBlock()) {
 	    return;
 	}
-	if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 	    return;
 	}
 	e.setCancelled(true);
@@ -60,10 +60,10 @@ public class ChestListener implements Listener {
 	if (!sb.isCustomBlock()) {
 	    return;
 	}
-	if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 	    return;
 	}
-	e.setCancelled(true);
+	//e.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -72,7 +72,7 @@ public class ChestListener implements Listener {
 	if (!sb.isCustomBlock()) {
 	    return;
 	}
-	if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 	    return;
 	}
 	e.setCancelled(true);
@@ -84,7 +84,7 @@ public class ChestListener implements Listener {
 	if (!sb.isCustomBlock()) {
 	    return;
 	}
-	if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 	    return;
 	}
 	e.setCancelled(true);
@@ -97,7 +97,7 @@ public class ChestListener implements Listener {
 	    if (!sb.isCustomBlock()) {
 		continue;
 	    }
-	    if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	    if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 		continue;
 	    }
 	    e.setCancelled(true);
@@ -114,7 +114,7 @@ public class ChestListener implements Listener {
 	if (!sb.isCustomBlock()) {
 	    return;
 	}
-	if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 	    return;
 	}
 	ManaChest mc = new ManaChest(e.getBlock());
@@ -133,7 +133,7 @@ public class ChestListener implements Listener {
 	if (!sb.isCustomBlock()) {
 	    return;
 	}
-	if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 	    return;
 	}
 	e.setCancelled(true);
@@ -146,7 +146,7 @@ public class ChestListener implements Listener {
 	    if (!sb.isCustomBlock()) {
 		continue;
 	    }
-	    if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	    if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 		continue;
 	    }
 	    e.blockList().remove(b);
@@ -158,17 +158,16 @@ public class ChestListener implements Listener {
 	if (locked == true) {
 	    return;
 	}
-	if (e.getClickedBlock()==null){
+	if (e.getClickedBlock() == null) {
 	    return;
 	}
 	SpoutBlock sb = (SpoutBlock) e.getClickedBlock();
 	if (!sb.isCustomBlock()) {
 	    return;
 	}
-	if (sb.getTypeId() != ManaMaterial.manaChamber.getBlockId() && sb.getData() != ManaMaterial.manaChamber.getBlockData()) {
+	if (!sb.getCustomBlock().getFullName().toLowerCase().equals("manabags.mana chamber")) {
 	    return;
 	}
-	e.setCancelled(true);
 	ManaChest mc = new ManaChest(e.getClickedBlock());
 	PlayerInteractEvent ev = new PlayerInteractEvent(e.getPlayer(), e.getAction(), e.getPlayer().getItemInHand(), mc.getFakeChest(), e.getBlockFace());
 	locked = true;
@@ -185,7 +184,7 @@ public class ChestListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onClose(InventoryCloseEvent e) {
-	if (e.getInventory().getName().toLowerCase().contains("mana chest")) {
+	if (e.getInventory().getName().toLowerCase().contains("manabags.mana chamber")) {
 	    if (ManaChest.open.containsKey(e.getPlayer())) {
 		ManaChest.open.get(e.getPlayer()).save();
 		ManaChest.open.remove(e.getPlayer());

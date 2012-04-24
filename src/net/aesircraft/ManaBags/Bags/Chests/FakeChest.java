@@ -26,6 +26,10 @@ public class FakeChest implements Block {
 	setDrops();
     }
 
+    public Collection<ItemStack> getFakeDrops() {
+	return drops;
+    }
+
     private void setDrops() {
 	Collection<ItemStack> drops = block.getDrops();
 	drops.clear();
@@ -33,7 +37,7 @@ public class FakeChest implements Block {
 	    drops.add(i);
 	}
 	//DROP CHEST TOO!
-	drops.add(new SpoutItemStack(ManaMaterial.manaChamber.getBlockItem(), 1));
+	drops.add(ManaMaterial.manaChamber.getItemDrop());
 	this.drops = drops;
     }
 
@@ -152,7 +156,7 @@ public class FakeChest implements Block {
 
     @Override
     public BlockState getState() {
-	FakeState st=new FakeState(this,chest);
+	FakeState st = new FakeState(this, chest);
 	return st;
     }
 
