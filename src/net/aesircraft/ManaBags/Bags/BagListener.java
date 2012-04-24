@@ -203,16 +203,16 @@ public class BagListener implements Listener {
 	if (e.getPlayer().getGameMode() == GameMode.CREATIVE && Config.getProtectCreative()) {
 	    return;
 	}
-
+        System.out.println("TEST3");
 	if (a2) {
 	    if (e.getPlayer().getItemInHand().getDurability() == i.getDurability()) {
 		BagManager bm = new BagManager(e.getPlayer());
 		bm.addBag();
 		return;
 	    }
-	}
-	if (a3) {
+	    System.out.println("TEST");
 	    if (e.getPlayer().getItemInHand().getDurability() == i2.getDurability()) {
+		System.out.println("TEST2");
 		BagManager bm = new BagManager(e.getPlayer());
 		bm.upgradeBag();
 		return;

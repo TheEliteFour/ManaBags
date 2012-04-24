@@ -158,6 +158,9 @@ public class ChestListener implements Listener {
 	if (locked == true) {
 	    return;
 	}
+	if (e.getClickedBlock()==null){
+	    return;
+	}
 	SpoutBlock sb = (SpoutBlock) e.getClickedBlock();
 	if (!sb.isCustomBlock()) {
 	    return;
