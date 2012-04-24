@@ -35,15 +35,11 @@ public class BagListener implements Listener {
 		ctr--;
 	    }
 	}
-	System.out.println("remaining space: " + ctr);
 	if (ctr < 2) {
 	    PlayerBag pb = new PlayerBag(player, 1);
 	    pb.load();
-	    System.out.println("test1");
 	    if (pb.getType() > 0) {
-		System.out.println("test2");
 		if (!pb.getStandardVirtualChest().isFull()) {
-		    System.out.println("test3");
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
