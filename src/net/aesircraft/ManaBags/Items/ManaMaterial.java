@@ -14,6 +14,7 @@ public class ManaMaterial {
     public static DiamondWeave diamondWeave;
     public static DiamondWeaveUpgrade diamondWeaveUpgrade;
     public static ManaChamber manaChamber;
+    public static DiamondWorkbench diamondWorkBench;
 
     public ManaMaterial(ManaBags plugin) {
 	if (!(!Config.getEnableSlot1() && !Config.getEnableSlot2() && !Config.getEnableSlot3() && !Config.getEnableSlot4() && !Config.getEnableManaWorkbench())) {
@@ -34,6 +35,10 @@ public class ManaMaterial {
 	}
 	if (Config.getUseManaChamber()){
 	    manaChamber=new ManaChamber(plugin);
+	}
+	
+	if (Config.getUseDiamondWorkbench()){
+	    diamondWorkBench=new DiamondWorkbench(plugin);
 	}
     }
 }

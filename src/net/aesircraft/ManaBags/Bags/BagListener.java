@@ -1,6 +1,7 @@
 package net.aesircraft.ManaBags.Bags;
 
 import net.aesircraft.ManaBags.Config.Config;
+import net.aesircraft.ManaBags.Items.ManaMaterial;
 import net.aesircraft.ManaBags.ManaBags;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -21,98 +22,98 @@ public class BagListener implements Listener {
     public BagListener(ManaBags plugin) {
 	Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
-    
+
     @EventHandler(priority = EventPriority.MONITOR)
     public void onInventoryPickup(PlayerPickupItemEvent e) {
-	if (!Config.getEnableAutoPickup()){
+	if (!Config.getEnableAutoPickup()) {
 	    return;
 	}
 	Player player = (Player) e.getPlayer();
-	int ctr=36;
-	for (ItemStack i : player.getInventory().getContents()){
-	    if (i!=null){
+	int ctr = 36;
+	for (ItemStack i : player.getInventory().getContents()) {
+	    if (i != null) {
 		ctr--;
 	    }
 	}
-	System.out.println("remaining space: "+ctr);
-	if (ctr<2){
-	    PlayerBag pb=new PlayerBag(player,1);
+	System.out.println("remaining space: " + ctr);
+	if (ctr < 2) {
+	    PlayerBag pb = new PlayerBag(player, 1);
 	    pb.load();
 	    System.out.println("test1");
-	    if (pb.getType()>0){
+	    if (pb.getType() > 0) {
 		System.out.println("test2");
-		if (!pb.getStandardVirtualChest().isFull()){
+		if (!pb.getStandardVirtualChest().isFull()) {
 		    System.out.println("test3");
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct=contents.length-1;ct>0;ct--){
-			if (contents[ct]==null){
-			    contents[ct]=e.getItem().getItemStack();
+		    for (int ct = contents.length - 1; ct > 0; ct--) {
+			if (contents[ct] == null) {
+			    contents[ct] = e.getItem().getItemStack();
 			    break;
 			}
-		    }		   
+		    }
 		    new ChestManager(pb).setInv(contents);
 		    return;
 		}
 	    }
-	    
-	    pb=new PlayerBag(player,2);
+
+	    pb = new PlayerBag(player, 2);
 	    pb.load();
-	    if (pb.getType()>0){
-		if (!pb.getStandardVirtualChest().isFull()){
+	    if (pb.getType() > 0) {
+		if (!pb.getStandardVirtualChest().isFull()) {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct=contents.length-1;ct>0;ct--){
-			if (contents[ct]==null){
-			    contents[ct]=e.getItem().getItemStack();
+		    for (int ct = contents.length - 1; ct > 0; ct--) {
+			if (contents[ct] == null) {
+			    contents[ct] = e.getItem().getItemStack();
 			    break;
 			}
-		    }		   
+		    }
 		    new ChestManager(pb).setInv(contents);
 		    return;
 		}
 	    }
-	    
-	    pb=new PlayerBag(player,3);
+
+	    pb = new PlayerBag(player, 3);
 	    pb.load();
-	    if (pb.getType()>0){
-		if (!pb.getStandardVirtualChest().isFull()){
+	    if (pb.getType() > 0) {
+		if (!pb.getStandardVirtualChest().isFull()) {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct=contents.length-1;ct>0;ct--){
-			if (contents[ct]==null){
-			    contents[ct]=e.getItem().getItemStack();
+		    for (int ct = contents.length - 1; ct > 0; ct--) {
+			if (contents[ct] == null) {
+			    contents[ct] = e.getItem().getItemStack();
 			    break;
 			}
-		    }		   
+		    }
 		    new ChestManager(pb).setInv(contents);
 		    return;
 		}
 	    }
-	    
-	    pb=new PlayerBag(player,4);
+
+	    pb = new PlayerBag(player, 4);
 	    pb.load();
-	    if (pb.getType()>0){
-		if (!pb.getStandardVirtualChest().isFull()){
+	    if (pb.getType() > 0) {
+		if (!pb.getStandardVirtualChest().isFull()) {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct=contents.length-1;ct>0;ct--){
-			if (contents[ct]==null){
-			    contents[ct]=e.getItem().getItemStack();
+		    for (int ct = contents.length - 1; ct > 0; ct--) {
+			if (contents[ct] == null) {
+			    contents[ct] = e.getItem().getItemStack();
 			    break;
 			}
-		    }		   
+		    }
 		    new ChestManager(pb).setInv(contents);
 		    return;
 		}
 	    }
-	   
-	    
-	    
+
+
+
 	}
 
     }
@@ -125,13 +126,15 @@ public class BagListener implements Listener {
 	}
 
     }
-    
+
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent e) {
 	Player player = (Player) e.getPlayer();
-	BagManager bm=new BagManager(player);
+	BagManager bm = new BagManager(player);
 	bm.addPermissionBag();
-	
+	ManaBench mb=new ManaBench(player);
+	mb.givePermissionBench();
+
 
     }
 
@@ -203,16 +206,23 @@ public class BagListener implements Listener {
 	if (e.getPlayer().getGameMode() == GameMode.CREATIVE && Config.getProtectCreative()) {
 	    return;
 	}
-        System.out.println("TEST3");
-	if (a2) {
+	if (Config.getUseDiamondWorkbench()) {
+	    ItemStack dw = new SpoutItemStack(ManaMaterial.diamondWorkBench, 1);
+	    if (e.getPlayer().getItemInHand().getDurability() == dw.getDurability()) {
+		ManaBench mb = new ManaBench(e.getPlayer());
+		mb.giveBench();
+		return;
+	    }
+	}
+	if (a1) {
 	    if (e.getPlayer().getItemInHand().getDurability() == i.getDurability()) {
 		BagManager bm = new BagManager(e.getPlayer());
 		bm.addBag();
 		return;
 	    }
-	    System.out.println("TEST");
+	}
+	if (a2) {
 	    if (e.getPlayer().getItemInHand().getDurability() == i2.getDurability()) {
-		System.out.println("TEST2");
 		BagManager bm = new BagManager(e.getPlayer());
 		bm.upgradeBag();
 		return;
