@@ -43,7 +43,12 @@ public class BagListener implements Listener {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct = contents.length - 1; ct > 0; ct--) {
+		    for (int ct = 0; ct <contents.length; ct++) {
+			if (contents[ct]!=null)
+			if (contents[ct].getTypeId()==e.getItem().getItemStack().getTypeId() && contents[ct].getDurability()==e.getItem().getItemStack().getDurability() && (contents[ct].getAmount()+e.getItem().getItemStack().getAmount())<=contents[ct].getMaxStackSize()){
+			    contents[ct].setAmount(contents[ct].getAmount()+e.getItem().getItemStack().getAmount());
+			    break;
+			}
 			if (contents[ct] == null) {
 			    contents[ct] = e.getItem().getItemStack();
 			    break;
@@ -61,7 +66,12 @@ public class BagListener implements Listener {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct = contents.length - 1; ct > 0; ct--) {
+		    for (int ct = 0; ct <contents.length; ct++) {
+			if (contents[ct]!=null)
+			if (contents[ct].getTypeId()==e.getItem().getItemStack().getTypeId() && contents[ct].getDurability()==e.getItem().getItemStack().getDurability() && (contents[ct].getAmount()+e.getItem().getItemStack().getAmount())<=contents[ct].getMaxStackSize()){
+			    contents[ct].setAmount(contents[ct].getAmount()+e.getItem().getItemStack().getAmount());
+			    break;
+			}
 			if (contents[ct] == null) {
 			    contents[ct] = e.getItem().getItemStack();
 			    break;
@@ -79,7 +89,12 @@ public class BagListener implements Listener {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct = contents.length - 1; ct > 0; ct--) {
+		    for (int ct = 0; ct <contents.length; ct++) {
+			if (contents[ct]!=null)
+			if (contents[ct].getTypeId()==e.getItem().getItemStack().getTypeId() && contents[ct].getDurability()==e.getItem().getItemStack().getDurability() && (contents[ct].getAmount()+e.getItem().getItemStack().getAmount())<=contents[ct].getMaxStackSize()){
+			    contents[ct].setAmount(contents[ct].getAmount()+e.getItem().getItemStack().getAmount());
+			    break;
+			}
 			if (contents[ct] == null) {
 			    contents[ct] = e.getItem().getItemStack();
 			    break;
@@ -97,7 +112,12 @@ public class BagListener implements Listener {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct = contents.length - 1; ct > 0; ct--) {
+		    for (int ct = 0; ct <contents.length; ct++) {
+			if (contents[ct]!=null)
+			if (contents[ct].getTypeId()==e.getItem().getItemStack().getTypeId() && contents[ct].getDurability()==e.getItem().getItemStack().getDurability() && (contents[ct].getAmount()+e.getItem().getItemStack().getAmount())<=contents[ct].getMaxStackSize()){
+			    contents[ct].setAmount(contents[ct].getAmount()+e.getItem().getItemStack().getAmount());
+			    break;
+			}
 			if (contents[ct] == null) {
 			    contents[ct] = e.getItem().getItemStack();
 			    break;
