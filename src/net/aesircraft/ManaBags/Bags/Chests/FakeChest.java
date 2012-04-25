@@ -1,10 +1,10 @@
 package net.aesircraft.ManaBags.Bags.Chests;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import net.aesircraft.ManaBags.Bags.VirtualChest;
 import net.aesircraft.ManaBags.Items.ManaMaterial;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -12,9 +12,12 @@ import org.bukkit.block.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.getspout.spoutapi.block.SpoutBlock;
+import org.getspout.spoutapi.block.SpoutChunk;
 import org.getspout.spoutapi.inventory.SpoutItemStack;
+import org.getspout.spoutapi.material.CustomBlock;
 
-public class FakeChest implements Block {
+public class FakeChest implements Block, SpoutBlock{
 
     private Block block;
     private VirtualChest chest;
@@ -44,16 +47,6 @@ public class FakeChest implements Block {
     @Override
     public byte getData() {
 	return 2;
-    }
-
-    @Override
-    public Block getRelative(int i, int i1, int i2) {
-	return block.getRelative(i, i1, i2);
-    }
-
-    @Override
-    public Block getRelative(BlockFace bf) {
-	return block.getRelative(bf);
     }
 
     @Override
@@ -109,11 +102,6 @@ public class FakeChest implements Block {
     @Override
     public Location getLocation() {
 	return block.getLocation();
-    }
-
-    @Override
-    public Chunk getChunk() {
-	return block.getChunk();
     }
 
     @Override
@@ -263,5 +251,116 @@ public class FakeChest implements Block {
     @Override
     public void removeMetadata(String string, Plugin plugin) {
 	//doesnt need this
+    }
+
+    @Override
+    public void setTypeAsync(Material mtrl) {
+	//again no
+    }
+
+    @Override
+    public void setTypeIdAsync(int i) {
+	//not quite
+    }
+
+    @Override
+    public void setDataAsync(byte b) {
+	//what need do you have
+    }
+
+    @Override
+    public void setTypeIdAndDataAsync(int i, byte b) {
+	//um no?
+    }
+
+    @Override
+    public void setCustomBlock(CustomBlock cb) {
+	//dont dothat either
+    }
+
+    @Override
+    public Serializable setData(String string, Serializable srlzbl) {
+	//dont do that
+	return null;
+    }
+
+    @Override
+    public Serializable getData(String string) {
+	return ((SpoutBlock) block).getData(string);
+    }
+
+    @Override
+    public Serializable removeData(String string) {
+	return ((SpoutBlock) block).removeData(string);
+    }
+
+    @Override
+    public String getName() {
+	return ((SpoutBlock) block).getName();
+    }
+
+    @Override
+    public void setBlockPowered(boolean bln) {
+	((SpoutBlock) block).setBlockPowered(bln);
+    }
+
+    @Override
+    public void setBlockPowered(boolean bln, BlockFace bf) {
+	((SpoutBlock) block).setBlockPowered(bln, bf);
+    }
+
+    @Override
+    public void resetBlockPower() {
+	((SpoutBlock) block).resetBlockPower();
+    }
+
+    @Override
+    public org.getspout.spoutapi.material.Block getBlockType() {
+	return ((SpoutBlock) block).getBlockType();
+    }
+
+    @Override
+    public SpoutItemStack toItemStack() {
+	return ((SpoutBlock) block).toItemStack();
+    }
+
+    @Override
+    public SpoutItemStack toItemStack(int i) {
+	return ((SpoutBlock) block).toItemStack(i);
+    }
+
+    @Override
+    public SpoutBlock getRelative(int i, int i1, int i2) {
+	return ((SpoutBlock) block).getRelative(i, i1, i2);
+    }
+
+    @Override
+    public SpoutBlock getRelative(BlockFace bf) {
+	return ((SpoutBlock) block).getRelative(bf);
+    }
+
+    @Override
+    public SpoutChunk getChunk() {
+	return ((SpoutBlock) block).getChunk();
+    }
+
+    @Override
+    public short getCustomBlockId() {
+	return ((SpoutBlock) block).getCustomBlockId();
+    }
+
+    @Override
+    public boolean isCustomBlock() {
+	return true;
+    }
+
+    @Override
+    public void removeCustomBlockData() {
+	//dont do that
+    }
+
+    @Override
+    public CustomBlock getCustomBlock() {
+	return ((SpoutBlock) block).getCustomBlock();
     }
 }
