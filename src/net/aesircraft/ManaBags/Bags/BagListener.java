@@ -3,6 +3,7 @@ package net.aesircraft.ManaBags.Bags;
 import net.aesircraft.ManaBags.Config.Config;
 import net.aesircraft.ManaBags.Items.ManaMaterial;
 import net.aesircraft.ManaBags.ManaBags;
+import net.aesircraft.ManaBags.SpoutBinder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -177,17 +178,17 @@ public class BagListener implements Listener {
 	ItemStack i2 = null;
 	ItemStack i3 = null;
 	if (!(!Config.getEnableSlot1() && !Config.getEnableSlot2() && !Config.getEnableSlot3() && !Config.getEnableSlot4() && !Config.getEnableManaWorkbench())) {
-	    i = new SpoutItemStack(ManaBags.getManaMaterial().manaBag, 1);
+	    i = new SpoutItemStack(SpoutBinder.getManaMaterial().manaBag, 1);
 	} else {
 	    a1 = false;
 	}
 	if (!(!Config.getEnableUpgradeSlot1() && !Config.getEnableUpgradeSlot2() && !Config.getEnableUpgradeSlot3() && !Config.getEnableUpgradeSlot4())) {
-	    i2 = new SpoutItemStack(ManaBags.getManaMaterial().diamondWeaveUpgrade, 1);
+	    i2 = new SpoutItemStack(SpoutBinder.getManaMaterial().diamondWeaveUpgrade, 1);
 	} else {
 	    a2 = false;
 	}
 	if (Config.getEnableManaWorkbench()) {
-	    i3 = new SpoutItemStack(ManaBags.getManaMaterial().manaWorkbench, 1);
+	    i3 = new SpoutItemStack(SpoutBinder.getManaMaterial().manaWorkbench, 1);
 	} else {
 	    a3 = false;
 	}

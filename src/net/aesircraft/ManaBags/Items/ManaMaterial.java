@@ -2,6 +2,7 @@ package net.aesircraft.ManaBags.Items;
 
 import net.aesircraft.ManaBags.Config.Config;
 import net.aesircraft.ManaBags.ManaBags;
+import org.bukkit.plugin.Plugin;
 
 public class ManaMaterial {
 
@@ -41,4 +42,5 @@ public class ManaMaterial {
 	    diamondWorkBench=new DiamondWorkbench(plugin);
 	}
     }
+
 }

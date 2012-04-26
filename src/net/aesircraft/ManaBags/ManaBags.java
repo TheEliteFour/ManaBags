@@ -1,5 +1,6 @@
 package net.aesircraft.ManaBags;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.aesircraft.ManaBags.API.ManaBagAPI;
 import net.aesircraft.ManaBags.Bags.BagListener;
@@ -10,21 +11,15 @@ import net.aesircraft.ManaBags.Commands.givebagupgrade;
 import net.aesircraft.ManaBags.Commands.givebench;
 import net.aesircraft.ManaBags.Commands.whatisthis;
 import net.aesircraft.ManaBags.Config.Config;
-import net.aesircraft.ManaBags.Items.ManaMaterial;
-import net.aesircraft.ManaBags.Keys.*;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.getspout.spoutapi.SpoutManager;
-import org.getspout.spoutapi.keyboard.KeyBindingManager;
-import org.getspout.spoutapi.keyboard.Keyboard;
 
 public class ManaBags extends JavaPlugin {
 
     private static ManaBags instance = null;
-    public static final Logger logger = Logger.getLogger("Minecraft");
-    private static ManaMaterial manaMaterial;
+    public static final Logger logger = Logger.getLogger("Minecraft");    
     public static Permission permission = null;
     private static ManaBagAPI api;
 
@@ -46,11 +41,7 @@ public class ManaBags extends JavaPlugin {
 
     private void setStatic() {
 	instance = this;
-    }
-
-    public static ManaMaterial getManaMaterial() {
-	return manaMaterial;
-    }
+    }    
 
     @Override
     public void onDisable() {
@@ -61,6 +52,61 @@ public class ManaBags extends JavaPlugin {
     public void onEnable() {
 	setStatic();
 	PluginManager pm = getServer().getPluginManager();
+	if (!pm.isPluginEnabled("Spout")){
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*");
+	    logger.log(Level.SEVERE,"    MANABAGS - SEVERE USER ERROR!");
+	    logger.log(Level.SEVERE,"=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"ManaBags is now disabling it's self.");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"This is happening because you did not");
+	    logger.log(Level.SEVERE,"follow instructions and install SpoutPlugin.");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"To prevent errors like this you should");
+	    logger.log(Level.SEVERE,"thoroughly read about what you are trying");
+	    logger.log(Level.SEVERE,"to install, or just not install it.");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"If you do have SpoutPlugin then read");
+	    logger.log(Level.SEVERE,"the rest of your log, completely,");
+	    logger.log(Level.SEVERE,"because SpoutPlugin obviously disabled");
+	    logger.log(Level.SEVERE,"it's self because you are not using");
+	    logger.log(Level.SEVERE,"proper versions.");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"Do not post this error because I will");
+	    logger.log(Level.SEVERE,"laugh at you if you do.");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"Have a nice day.");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    logger.log(Level.SEVERE,"");
+	    return;
+	}
+	
 	Config.writeDefaults();
 	Config.upgrade();
 	if (Config.getUsePermissions()) {
@@ -69,13 +115,9 @@ public class ManaBags extends JavaPlugin {
 		Config.userPermissions = true;
 	    }
 	}
-	manaMaterial = new ManaMaterial(this);
-	KeyBindingManager kbm = SpoutManager.getKeyBindingManager();
-	kbm.registerBinding("Bag.1", Keyboard.KEY_NUMPAD1, "Open Bag 1", new Bag1Key(), this);
-	kbm.registerBinding("Bag.2", Keyboard.KEY_NUMPAD2, "Open Bag 2", new Bag2Key(), this);
-	kbm.registerBinding("Bag.3", Keyboard.KEY_NUMPAD3, "Open Bag 3", new Bag3Key(), this);
-	kbm.registerBinding("Bag.4", Keyboard.KEY_NUMPAD4, "Open Bag 4", new Bag4Key(), this);
-	kbm.registerBinding("Workbench", Keyboard.KEY_NUMPAD0, "Workbench", new WorkbenchKey(), this);
+	
+	SpoutBinder.bind(this);
+	
 	new BagListener(this);
 	new ChestListener(this);
 	getCommand("whatisthis").setExecutor(new whatisthis(this));
