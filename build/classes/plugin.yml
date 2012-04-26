@@ -1,6 +1,6 @@
 name: ManaBags
 main: net.aesircraft.ManaBags.ManaBags
-version: V1.4.2
+version: V1.4.4
 description: Complete Magic Bag system!
 authors: [TheElite4]
 softdepend: [ UltimateArena,Vault,xAuth ]
