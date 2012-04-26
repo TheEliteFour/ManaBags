@@ -28,6 +28,9 @@ public class BagListener implements Listener {
 	if (!Config.getEnableAutoPickup()) {
 	    return;
 	}
+	if (e.isCancelled()){
+	    return;
+	}
 	Player player = (Player) e.getPlayer();
 	int ctr = 36;
 	for (ItemStack i : player.getInventory().getContents()) {
