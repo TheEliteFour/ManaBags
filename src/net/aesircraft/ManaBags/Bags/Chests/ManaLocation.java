@@ -11,7 +11,7 @@ public class ManaLocation {
 
     private void setString() {
 	String s = "";
-	s = location.getWorld().toString() + "," + location.getBlockX() + "," + location.getBlockY() + "," + location.getBlockZ();
+	s = location.getWorld().getName() + "," + location.getBlockX() + "," + location.getBlockY() + "," + location.getBlockZ();
 	string = s;
     }
 

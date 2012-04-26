@@ -25,6 +25,15 @@ public class ChestListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
+    public void onClose(InventoryCloseEvent e) {
+	if (ManaChest.open.containsKey(e.getPlayer())) {
+	    ManaChest.open.get(e.getPlayer()).save();
+	    ManaChest.open.remove(e.getPlayer());
+	}
+
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onBreak(BlockBreakEvent e) {
 	if (locked == true) {
 	    return;
@@ -180,16 +189,5 @@ public class ChestListener implements Listener {
 	    return;
 	}
 	mc.open(e.getPlayer());
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onClose(InventoryCloseEvent e) {
-	if (e.getInventory().getName().toLowerCase().contains("manabags.mana chamber")) {
-	    if (ManaChest.open.containsKey(e.getPlayer())) {
-		ManaChest.open.get(e.getPlayer()).save();
-		ManaChest.open.remove(e.getPlayer());
-	    }
-
-	}
     }
 }
