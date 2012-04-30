@@ -29,6 +29,12 @@ public class givebench implements CommandExecutor {
 		    return true;
 		}
 	    }
+	    else{
+		if (!player.isOp()){
+		    player.sendMessage("§4You do not have permission to do that!");
+		    return true;
+		}
+	    }
 	}
 
 	if (comA.length < 1) {
