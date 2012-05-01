@@ -14,7 +14,7 @@ import org.getspout.spoutapi.material.block.GenericCubeCustomBlock;
 public class ManaChamber extends GenericCubeCustomBlock {
 
     public ManaChamber(Plugin plugin) {
-	super(plugin, "Mana Chamber",Config.getManaChamberTexture(),Config.getManaChamberTextureSize());
+	super(plugin, "Mana Chamber",54,Config.getManaChamberTexture(),Config.getManaChamberTextureSize());
 	if (Config.getUseManaChamberRecipe()){
 	    RecipeCreator r=new RecipeCreator();
 	    if (!r.setRecipe(this.getBlockItem(), Config.getManaChamberRecipe())){

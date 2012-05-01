@@ -151,13 +151,10 @@ public class ManaChest {
     }
 
     public void breakNaturally(BlockBreakEvent event) {
-	event.setCancelled(true);
-	FakeChest b = new FakeChest(block, chest);
-	BlockBreakEvent ev = new BlockBreakEvent(b, event.getPlayer());
-	//Bukkit.getPluginManager().callEvent(ev);
-	if (ev.isCancelled()) {
+	if (event.isCancelled()) {
 	    return;
 	}
+	FakeChest b = new FakeChest(block, chest);
 	block.setTypeId(0);
 	for (Iterator<org.bukkit.inventory.ItemStack> it = b.getDrops().iterator(); it.hasNext();) {
 	    org.bukkit.inventory.ItemStack i = it.next();
