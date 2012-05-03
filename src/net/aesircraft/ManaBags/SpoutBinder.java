@@ -22,6 +22,7 @@ public class SpoutBinder {
     
     public static void bind(ManaBags plug){
 	manaMaterial = new ManaMaterial(plug);
+	manaMaterial.load(plug);
 	KeyBindingManager kbm = SpoutManager.getKeyBindingManager();
 	kbm.registerBinding("Bag.1", Keyboard.KEY_NUMPAD1, "Open Bag 1", new Bag1Key(), plug);
 	kbm.registerBinding("Bag.2", Keyboard.KEY_NUMPAD2, "Open Bag 2", new Bag2Key(), plug);

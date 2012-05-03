@@ -17,7 +17,10 @@ public class ManaMaterial {
     public static ManaChamber manaChamber;
     public static DiamondWorkbench diamondWorkBench;
 
-    public ManaMaterial(ManaBags plugin) {
+    public ManaMaterial(ManaBags plugin) {	
+    }
+    
+    public void load(ManaBags plugin){
 	if (!(!Config.getEnableSlot1() && !Config.getEnableSlot2() && !Config.getEnableSlot3() && !Config.getEnableSlot4() && !Config.getEnableManaWorkbench())) {
 	    manaDust = new ManaDust(plugin);
 	    manaThread = new ManaThread(plugin);
