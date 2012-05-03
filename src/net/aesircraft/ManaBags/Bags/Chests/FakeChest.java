@@ -39,8 +39,6 @@ public class FakeChest implements Block, SpoutBlock{
 	for (ItemStack i : chest.getContents()) {
 	    drops.add(i);
 	}
-	//DROP CHEST TOO!
-	drops.add(ManaMaterial.manaChamber.getItemDrop());
 	this.drops = drops;
     }
 

@@ -29,7 +29,7 @@ public class BagListener implements Listener {
 	if (!Config.getEnableAutoPickup()) {
 	    return;
 	}
-	if (e.isCancelled()){
+	if (e.isCancelled()) {
 	    return;
 	}
 	Player player = (Player) e.getPlayer();
@@ -47,11 +47,12 @@ public class BagListener implements Listener {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct = 0; ct <contents.length; ct++) {
-			if (contents[ct]!=null)
-			if (contents[ct].getTypeId()==e.getItem().getItemStack().getTypeId() && contents[ct].getDurability()==e.getItem().getItemStack().getDurability() && (contents[ct].getAmount()+e.getItem().getItemStack().getAmount())<=contents[ct].getMaxStackSize()){
-			    contents[ct].setAmount(contents[ct].getAmount()+e.getItem().getItemStack().getAmount());
-			    break;
+		    for (int ct = 0; ct < contents.length; ct++) {
+			if (contents[ct] != null) {
+			    if (contents[ct].getTypeId() == e.getItem().getItemStack().getTypeId() && contents[ct].getDurability() == e.getItem().getItemStack().getDurability() && (contents[ct].getAmount() + e.getItem().getItemStack().getAmount()) <= contents[ct].getMaxStackSize()) {
+				contents[ct].setAmount(contents[ct].getAmount() + e.getItem().getItemStack().getAmount());
+				break;
+			    }
 			}
 			if (contents[ct] == null) {
 			    contents[ct] = e.getItem().getItemStack();
@@ -70,11 +71,12 @@ public class BagListener implements Listener {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct = 0; ct <contents.length; ct++) {
-			if (contents[ct]!=null)
-			if (contents[ct].getTypeId()==e.getItem().getItemStack().getTypeId() && contents[ct].getDurability()==e.getItem().getItemStack().getDurability() && (contents[ct].getAmount()+e.getItem().getItemStack().getAmount())<=contents[ct].getMaxStackSize()){
-			    contents[ct].setAmount(contents[ct].getAmount()+e.getItem().getItemStack().getAmount());
-			    break;
+		    for (int ct = 0; ct < contents.length; ct++) {
+			if (contents[ct] != null) {
+			    if (contents[ct].getTypeId() == e.getItem().getItemStack().getTypeId() && contents[ct].getDurability() == e.getItem().getItemStack().getDurability() && (contents[ct].getAmount() + e.getItem().getItemStack().getAmount()) <= contents[ct].getMaxStackSize()) {
+				contents[ct].setAmount(contents[ct].getAmount() + e.getItem().getItemStack().getAmount());
+				break;
+			    }
 			}
 			if (contents[ct] == null) {
 			    contents[ct] = e.getItem().getItemStack();
@@ -93,11 +95,12 @@ public class BagListener implements Listener {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct = 0; ct <contents.length; ct++) {
-			if (contents[ct]!=null)
-			if (contents[ct].getTypeId()==e.getItem().getItemStack().getTypeId() && contents[ct].getDurability()==e.getItem().getItemStack().getDurability() && (contents[ct].getAmount()+e.getItem().getItemStack().getAmount())<=contents[ct].getMaxStackSize()){
-			    contents[ct].setAmount(contents[ct].getAmount()+e.getItem().getItemStack().getAmount());
-			    break;
+		    for (int ct = 0; ct < contents.length; ct++) {
+			if (contents[ct] != null) {
+			    if (contents[ct].getTypeId() == e.getItem().getItemStack().getTypeId() && contents[ct].getDurability() == e.getItem().getItemStack().getDurability() && (contents[ct].getAmount() + e.getItem().getItemStack().getAmount()) <= contents[ct].getMaxStackSize()) {
+				contents[ct].setAmount(contents[ct].getAmount() + e.getItem().getItemStack().getAmount());
+				break;
+			    }
 			}
 			if (contents[ct] == null) {
 			    contents[ct] = e.getItem().getItemStack();
@@ -116,11 +119,12 @@ public class BagListener implements Listener {
 		    e.setCancelled(true);
 		    e.getItem().remove();
 		    ItemStack[] contents = pb.getStandardVirtualChest().getContents();
-		    for (int ct = 0; ct <contents.length; ct++) {
-			if (contents[ct]!=null)
-			if (contents[ct].getTypeId()==e.getItem().getItemStack().getTypeId() && contents[ct].getDurability()==e.getItem().getItemStack().getDurability() && (contents[ct].getAmount()+e.getItem().getItemStack().getAmount())<=contents[ct].getMaxStackSize()){
-			    contents[ct].setAmount(contents[ct].getAmount()+e.getItem().getItemStack().getAmount());
-			    break;
+		    for (int ct = 0; ct < contents.length; ct++) {
+			if (contents[ct] != null) {
+			    if (contents[ct].getTypeId() == e.getItem().getItemStack().getTypeId() && contents[ct].getDurability() == e.getItem().getItemStack().getDurability() && (contents[ct].getAmount() + e.getItem().getItemStack().getAmount()) <= contents[ct].getMaxStackSize()) {
+				contents[ct].setAmount(contents[ct].getAmount() + e.getItem().getItemStack().getAmount());
+				break;
+			    }
 			}
 			if (contents[ct] == null) {
 			    contents[ct] = e.getItem().getItemStack();
@@ -152,7 +156,7 @@ public class BagListener implements Listener {
 	Player player = (Player) e.getPlayer();
 	BagManager bm = new BagManager(player);
 	bm.addPermissionBag();
-	ManaBench mb=new ManaBench(player);
+	ManaBench mb = new ManaBench(player);
 	mb.givePermissionBench();
 
 
@@ -230,6 +234,13 @@ public class BagListener implements Listener {
 	    ItemStack dw = new SpoutItemStack(ManaMaterial.diamondWorkBench, 1);
 	    if (e.getPlayer().getItemInHand().getDurability() == dw.getDurability()) {
 		ManaBench mb = new ManaBench(e.getPlayer());
+		ItemStack r = e.getPlayer().getItemInHand();
+		i.setAmount(r.getAmount() - 1);
+		if (r.getAmount() == 0) {
+		    e.getPlayer().getInventory().setItemInHand(null);
+		} else {
+		    e.getPlayer().getInventory().setItemInHand(r);
+		}
 		mb.giveBench();
 		return;
 	    }
