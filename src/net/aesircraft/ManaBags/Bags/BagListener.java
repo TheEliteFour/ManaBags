@@ -234,12 +234,11 @@ public class BagListener implements Listener {
 	    ItemStack dw = new SpoutItemStack(ManaMaterial.diamondWorkBench, 1);
 	    if (e.getPlayer().getItemInHand().getDurability() == dw.getDurability()) {
 		ManaBench mb = new ManaBench(e.getPlayer());
-		ItemStack r = e.getPlayer().getItemInHand();
-		i.setAmount(r.getAmount() - 1);
-		if (r.getAmount() == 0) {
+		ItemStack r = e.getPlayer().getItemInHand();		
+		if (r.getAmount() ==1) {
 		    e.getPlayer().getInventory().setItemInHand(null);
 		} else {
-		    e.getPlayer().getInventory().setItemInHand(r);
+		    e.getPlayer().getInventory().getItemInHand().setAmount(e.getPlayer().getItemInHand().getAmount()-1);
 		}
 		mb.giveBench();
 		return;
